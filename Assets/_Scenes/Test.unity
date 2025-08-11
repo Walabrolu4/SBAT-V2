@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585548}
   - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
@@ -208,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4019206, y: -0, z: -0, w: 0.91567457}
-  m_LocalPosition: {x: 454, y: 287, z: 227}
+  m_LocalPosition: {x: 0, y: 180, z: -280}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,29 +257,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d60e2d93b85f14b83b462fedd3267d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitTarget: {fileID: 664563880}
-  panSpeed: 0.5
-  panDistanceScale: 0.002
-  orbitSpeed: 1
-  minPitch: 5
-  maxPitch: 80
-  zoomSpeed: 2
-  minDistance: 2
-  maxDistance: 120
-  minFov: 20
-  maxFov: 120
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +270,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 1
+  scrollSpeed: 1
+  minZoom: 5
+  maxZoom: 500
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  rayMaxDistance: 10000
+  fallbackPlaneY: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
