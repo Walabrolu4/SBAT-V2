@@ -17,7 +17,7 @@ public class UnitPathVisualizer : MonoBehaviour
   }
   public void ClearPath()
   {
-    line.positionCount = 0;
+    line.positionCount = 1;
   }
 
   public void DrawPath(NavMeshPath path)

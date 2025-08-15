@@ -24,7 +24,6 @@ public sealed class Unit : MonoBehaviour
 
   private NavMeshAgent agent;
   private readonly Queue<Vector3> waypoints = new Queue<Vector3>();
-
   private UnitPathVisualizer pathVisualizer;
 
   public event Action<UnitState> OnStateChanged;
@@ -96,6 +95,7 @@ public sealed class Unit : MonoBehaviour
       //Failed to find a path-skip and try the next
       TryBeginNextWaypoint();
     }
+    pathVisualizer.ClearPath();
     pathVisualizer.SetOrigin(transform.position);
     pathVisualizer.DrawPath(agent.path);
     Debug.Log($"{name} is moving to {agent.path}");
