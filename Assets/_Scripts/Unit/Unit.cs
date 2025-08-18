@@ -95,9 +95,7 @@ public sealed class Unit : MonoBehaviour
       //Failed to find a path-skip and try the next
       TryBeginNextWaypoint();
     }
-    pathVisualizer.ClearPath();
-    pathVisualizer.SetOrigin(transform.position);
-    pathVisualizer.DrawPath(agent.path);
+    pathVisualizer.DrawFromAgent(agent);
     Debug.Log($"{name} is moving to {agent.path}");
     SetState(UnitState.Moving);
   }
