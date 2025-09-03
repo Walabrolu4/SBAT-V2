@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnitScaler : MonoBehaviour
 {
 
-  CameraControllerV2 camera;
+  CameraControllerV2 cameraController;
   [SerializeField] float minSize = 25;
   [SerializeField] float maxSize = 100;
 
@@ -12,9 +12,9 @@ public class UnitScaler : MonoBehaviour
   //float currentZoom;
   void Start()
   {
-    camera = Camera.main.gameObject.GetComponent<CameraControllerV2>();
+    cameraController = Camera.main.gameObject.GetComponent<CameraControllerV2>();
 
-    if (!camera)
+    if (!cameraController)
     {
       Debug.LogError("NO SCRIPT FOUND ON CAMERA");
     }
@@ -27,7 +27,7 @@ public class UnitScaler : MonoBehaviour
   void ChangeScale(float currentZoom)
   {
     float newScale = Utils.Map(currentZoom, minZoom, maxZoom, minSize, maxSize);
-    transform.localScale = new Vector3(newScale,newScale,newScale);
+    transform.localScale = new Vector3(newScale, newScale, newScale);
     //Debug.Log(gameObject.name + "Scale Changed to " + newScale);
   }
 }

@@ -8,7 +8,7 @@ public class CameraControllerV2 : MonoBehaviour
 
   [Header("Zoom (clamped by distance)")]
   [SerializeField] float scrollSpeed = 3f;
-  [SerializeField] static float minZoom = 150f;
+  [SerializeField] static float minZoom = 50f;
   [SerializeField] static float maxZoom = 500f;
 
   [Header("Orbit")]
@@ -164,7 +164,7 @@ public class CameraControllerV2 : MonoBehaviour
     return GetFocusPoint();
   }
 
-  public static (float,float) GetZoom()
+  public static (float, float) GetZoom()
   {
     return (minZoom, maxZoom);
   }

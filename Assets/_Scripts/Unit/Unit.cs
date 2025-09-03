@@ -13,6 +13,7 @@ public enum UnitState
   OutOfFuel
 }
 
+[RequireComponent(typeof(NavMeshAgent))]
 public sealed class Unit : MonoBehaviour
 {
   [Header("Config")]
@@ -26,12 +27,15 @@ public sealed class Unit : MonoBehaviour
   private readonly Queue<Vector3> waypoints = new Queue<Vector3>();
   private UnitPathVisualizer pathVisualizer;
 
+  //Events
   public event Action<UnitState> OnStateChanged;
+  public event Action<float> OnFuelChanged;
+  public event Action OnFuelEmpty;
 
+  //Getters
   public UnitStats Stats => stats;
   public UnitState State => state;
   public float CurrentFuel => currentFuel;
-
   public bool IsIdle => state == UnitState.Idling;
   public bool IsOutOfFuel => state == UnitState.OutOfFuel;
 
@@ -61,7 +65,50 @@ public sealed class Unit : MonoBehaviour
   }
 
 
-  // --- Public API -------------------------
+  // --- Fuel Api ---------------------------
+
+  public bool TryConsumeFuel(float amount)
+  {
+    if (amount <= 0f || IsOutOfFuel) return false;
+
+    float prevFuel = currentFuel;
+    currentFuel = Mathf.Max(0f, currentFuel - amount);
+
+    if (!Mathf.Approximately(prevFuel, currentFuel))
+    {
+      OnFuelChanged?.Invoke(currentFuel);
+    }
+
+    if (currentFuel <= 0f)
+    {
+      SetState(UnitState.OutOfFuel);
+      OnFuelEmpty?.Invoke();
+      return false;
+    }
+
+    return true;
+  }
+
+  public void AddFuel(float amount)
+  {
+    if (amount <= 0) return;
+
+    float prevFuel = currentFuel;
+    currentFuel = MathF.Min(stats.maxFuel, currentFuel + amount);
+
+    if (!Mathf.Approximately(prevFuel, currentFuel))
+    {
+      OnFuelChanged?.Invoke(currentFuel);
+    }
+
+    if (state == UnitState.OutOfFuel && currentFuel > 0f)
+    {
+      SetState(UnitState.Idling);
+    }
+  }
+
+
+  // --- Orders API -------------------------
 
   public void ClearOrders()
   {
@@ -108,6 +155,8 @@ public sealed class Unit : MonoBehaviour
   }
 }
 
+
+/// ------------ Editor Script --------------
 #if UNITY_EDITOR
 
 [CustomEditor(typeof(Unit))]

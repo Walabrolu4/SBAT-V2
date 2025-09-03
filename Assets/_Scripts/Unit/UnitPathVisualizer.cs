@@ -76,7 +76,7 @@ public class UnitPathVisualizer : MonoBehaviour
     }
   }
 
-  /// Compute immediately (synchronous) and draw, without using the agent’s async path.
+  // Compute immediately (synchronous) and draw, without using the agent’s async path.
   public bool ComputeAndDraw(Vector3 origin, Vector3 destination, int areaMask = NavMesh.AllAreas)
   {
     SetOrigin(origin);
